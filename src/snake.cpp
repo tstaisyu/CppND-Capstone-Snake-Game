@@ -1,6 +1,8 @@
-#include "snake.h"
+
 #include <cmath>
 #include <iostream>
+#include "snake.h"
+#include "game.h"
 
 void Snake::Update() {
   SDL_Point prev_cell{
@@ -65,13 +67,37 @@ void Snake::UpdateBody(SDL_Point &current_head_cell, SDL_Point &prev_head_cell) 
   // Check if the snake has died.
   for (auto const &item : body) {
     if (current_head_cell.x == item.x && current_head_cell.y == item.y) {
-      alive = false;
+     // alive = false;
     }
   }
 }
 
 void Snake::GrowBody() { growing = true; }
 void Snake::LostBody() { lostBody = true; }
+
+void Snake::WallRedirect() {
+  if (Game::_Wall == true) {
+    switch (direction) {
+      case Direction::kUp:
+        head_y += speed;
+        break;
+
+      case Direction::kDown:
+        head_y -= speed;
+        break;
+
+      case Direction::kLeft:
+        head_x += speed;
+        break;
+
+      case Direction::kRight:
+        head_x -= speed;
+        break;
+    }
+  }
+}
+
+
 
 // Inefficient method to check if cell is occupied by snake.
 bool Snake::SnakeCell(int x, int y) {

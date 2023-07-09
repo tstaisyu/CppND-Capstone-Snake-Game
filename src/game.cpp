@@ -1,6 +1,7 @@
 #include "game.h"
 #include <iostream>
 #include "SDL.h"
+#include "snake.h"
 
 Game::Game(std::size_t grid_width, std::size_t grid_height)
     : snake(grid_width, grid_height),
@@ -107,6 +108,12 @@ void Game::PlaceWall() {
       wall4.y = y4;
       return;
     }
+  }
+}
+
+void Game::WallCheck(int x, int y) {
+  if (x == wall1.x && y == wall1.y) {
+    _Wall = true; 
   }
 }
 

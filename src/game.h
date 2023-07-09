@@ -14,13 +14,15 @@ class Game {
            std::size_t target_frame_duration);
   int GetScore() const;
   int GetSize() const;
-
+  bool _Wall{false};
+  
  private:
   Snake snake;
   SDL_Point food;
   SDL_Point poison1;
   SDL_Point poison2;
   SDL_Point wall1, wall2, wall3, wall4;
+
 
   std::random_device dev;
   std::mt19937 engine;
@@ -30,6 +32,7 @@ class Game {
   int score{0};
 
   void PlaceWall();
+  void WallCheck(int x, int y);
   void PlaceFood();
   void PlacePoison();
   void Update();

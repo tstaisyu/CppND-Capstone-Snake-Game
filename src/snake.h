@@ -18,6 +18,7 @@ class Snake {
 
   void GrowBody();
   void LostBody();
+  void WallRedirect();
   bool SnakeCell(int x, int y);
 
   Direction direction = Direction::kUp;
