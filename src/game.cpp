@@ -7,7 +7,9 @@ Game::Game(std::size_t grid_width, std::size_t grid_height)
       engine(dev()),
       random_w(0, static_cast<int>(grid_width - 1)),
       random_h(0, static_cast<int>(grid_height - 1)) {
+  PlaceWall();
   PlaceFood();
+  PlacePoison();
 }
 
 void Game::Run(Controller const &controller, Renderer &renderer,
@@ -25,7 +27,7 @@ void Game::Run(Controller const &controller, Renderer &renderer,
     // Input, Update, Render - the main game loop.
     controller.HandleInput(running, snake);
     Update();
-    renderer.Render(snake, food);
+    renderer.Render(snake, food, poison1, poison2, wall1, wall2, wall3, wall4);
 
     frame_end = SDL_GetTicks();
 
@@ -65,6 +67,49 @@ void Game::PlaceFood() {
   }
 }
 
+void Game::PlacePoison() {
+  int x1, y1, x2, y2;
+  while (true) {
+    x1 = random_w(engine);
+    y1 = random_h(engine);
+    x2 = random_w(engine);
+    y2 = random_h(engine);
+    // Check that the location is not occupied by a snake item before placing
+    // food.
+    if (!snake.SnakeCell(x1, y1) && !snake.SnakeCell(x2, y2)) {
+      poison1.x = x1;
+      poison1.y = y1;
+      poison2.x = x2;
+      poison2.y = y2;
+      return;
+    }
+  }
+}
+
+void Game::PlaceWall() {
+  int x, y1, y2, y3, y4;
+  while (true) {
+    x = random_w(engine);
+    y1 = 0;
+    y2 = 0 + 1;
+    y3 = 0 + 2;
+    y4 = 0 + 3;
+    // Check that the location is not occupied by a snake item before placing
+    // food.
+    if (!snake.SnakeCell(x, y1) && !snake.SnakeCell(x, y2) && !snake.SnakeCell(x, y3) && !snake.SnakeCell(x, y4)) {
+      wall1.x = x;
+      wall1.y = y1;
+      wall2.x = x;
+      wall2.y = y2;
+      wall3.x = x;
+      wall3.y = y3;
+      wall4.x = x;
+      wall4.y = y4;
+      return;
+    }
+  }
+}
+
 void Game::Update() {
   if (!snake.alive) return;
 
@@ -80,6 +125,15 @@ void Game::Update() {
     // Grow snake and increase speed.
     snake.GrowBody();
     snake.speed += 0.02;
+  }
+  
+    // Check if there are poisons over here
+  if (poison1.x == new_x && poison1.y == new_y || poison2.x == new_x && poison2.y == new_y) {
+    score = 0;
+    PlacePoison();
+    // Grow snake and increase speed.
+    snake.LostBody();
+    snake.speed = 0.1;
   }
 }
 

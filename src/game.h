@@ -18,6 +18,9 @@ class Game {
  private:
   Snake snake;
   SDL_Point food;
+  SDL_Point poison1;
+  SDL_Point poison2;
+  SDL_Point wall1, wall2, wall3, wall4;
 
   std::random_device dev;
   std::mt19937 engine;
@@ -26,7 +29,9 @@ class Game {
 
   int score{0};
 
+  void PlaceWall();
   void PlaceFood();
+  void PlacePoison();
   void Update();
 };
 
