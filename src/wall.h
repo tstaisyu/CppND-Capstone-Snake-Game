@@ -4,38 +4,25 @@
 #include <vector>
 #include "SDL.h"
 
-class Snake {
+class Wall {
  public:
-  enum class Direction { kUp, kDown, kLeft, kRight };
 
-  Snake(int grid_width, int grid_height)
-      : grid_width(grid_width),
-        grid_height(grid_height),
-        head_x(grid_width / 2),
-        head_y(grid_height / 2) {}
+  Wall(int length, bool vertical) {};
 
   void Update();
 
-  void GrowBody();
-  void LostBody();
   void WallRedirect();
   bool SnakeCell(int x, int y);
 
-  Direction direction = Direction::kUp;
-
-  float speed{0.2f};
-  int size{1};
-  bool alive{true};
+  int size{4};
   float head_x;
   float head_y;
-  std::vector<SDL_Point> body;
 
  private:
   void UpdateHead();
   void UpdateBody(SDL_Point &current_cell, SDL_Point &prev_cell);
 
-  bool growing{false};
-  bool lostBody{false};
+  bool vertical;
   int grid_width;
   int grid_height;
 };

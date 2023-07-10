@@ -6,6 +6,7 @@
 #include "controller.h"
 #include "renderer.h"
 #include "snake.h"
+#include "wall.h"
 
 class Game {
  public:
@@ -21,7 +22,8 @@ class Game {
   SDL_Point food;
   SDL_Point poison1;
   SDL_Point poison2;
-  SDL_Point wall1, wall2, wall3, wall4;
+  Wall wall1, wall2, wall3, wall4;
+  std::vector<std::vector<SDL_Point>> wall_list;
 
 
   std::random_device dev;

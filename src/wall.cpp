@@ -4,6 +4,23 @@
 #include "snake.h"
 #include "game.h"
 
+Wall::wall() {
+  int x, y;
+  while (true) {
+    x = random_w(engine);
+    y = random_h(engine);
+    // Check that the location is not occupied by a snake item before placing
+    // food.
+    if (!snake.SnakeCell(x, y)) {
+      food.x = x;
+      food.y = y;
+      return;
+    }
+  }
+}
+
+
+
 void Snake::Update() {
 }
 
