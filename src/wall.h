@@ -3,6 +3,8 @@
 
 #include <vector>
 #include <random>
+#include <thread>
+#include <chrono>
 #include "SDL.h"
 
 class Wall {
@@ -42,12 +44,14 @@ class Wall {
 
   int grid_width;
   int grid_height;
+  bool _reverse{true};
 
   std::random_device dev;
   std::mt19937 engine;
   std::uniform_int_distribution<int> random_w;
   std::uniform_int_distribution<int> random_h;
 
+  void MoveCycle();
   void MoveBlock();
 
 };

@@ -36,7 +36,7 @@ void Game::Run(Controller const &controller, Renderer *renderer,
     // Input, Update, Render - the main game loop.
     controller.HandleInput(running, snake, *this);
     GreatWallRedirect();
-    WallRedirect();
+    DeathBlock();
     Update(renderer);
     renderer->Render(snake, food, poison1, poison2, block1, block2, block3, block4, &_bounus);
 
@@ -49,7 +49,7 @@ void Game::Run(Controller const &controller, Renderer *renderer,
 
     // After every second, update the window title.
     if (frame_end - title_timestamp >= 1000) {
-      renderer->UpdateWindowTitle(score, frame_count);
+      renderer->UpdateWindowTitle(score, frame_count, best_score);
       frame_count = 0;
       title_timestamp = frame_end;
     }
@@ -78,7 +78,7 @@ void Game::PlaceFood() {
   }
 }
 
-void Game::BounusThread(bool *bounus) {
+void Game::BounusTime(bool *bounus) {
   std::this_thread::sleep_for(std::chrono::milliseconds(7000));
   *bounus = false;
 }
@@ -153,6 +153,9 @@ void Game::Update(Renderer *renderer) {
     } else {
       score++;
     }
+    if (best_score < score) {
+      best_score = score;
+    }
     PlaceFood();
     PlacePoison();
     // Grow snake and increase speed.
@@ -160,8 +163,8 @@ void Game::Update(Renderer *renderer) {
     snake.speed += 0.02;
     if(score % 4 == 0) {
       _bounus = true;
-      std::thread BounusTime(&Game::BounusThread, this, &_bounus);
-      BounusTime.detach();
+      std::thread BounusThread(&Game::BounusTime, this, &_bounus);
+      BounusThread.detach();
     }
   }
   
@@ -177,7 +180,7 @@ void Game::Update(Renderer *renderer) {
 }
 
 // the direction of snake reverses when the snake hits the blocks. 
-void Game::WallRedirect() {
+void Game::DeathBlock() {
 
   int new_x = static_cast<int>(snake.head_x);
   int new_y = static_cast<int>(snake.head_y);

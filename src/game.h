@@ -16,7 +16,7 @@ class Game {
            std::size_t target_frame_duration);
   int GetScore() const;
   int GetSize() const;
-  void BounusThread(bool *bounus); 
+  void BounusTime(bool *bounus); 
   void PauseToggle();
   void Pause();
   void Resume();
@@ -41,12 +41,13 @@ class Game {
   bool _bounus;
 
   int score{0};
+  int best_score{0};
 
   void PlaceWall();
   void PlaceFood();
   void PlacePoison();
   void Update(Renderer *renderer);
-  void WallRedirect();
+  void DeathBlock();
   void GreatWallRedirect();
   };
 

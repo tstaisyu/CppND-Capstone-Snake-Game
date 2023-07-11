@@ -9,12 +9,30 @@ This is a starter repo for the Capstone project in the [Udacity C++ Nanodegree P
 In this project, I added several functions to the Snake Game starter code based on what I learned in the Udacity C++ Nanodegree Program.
 
 ## Additional Features
-* There is a greatwall around the display.
-* Pause 
-
+* Bounus food (yellow): Randomly normal food (greed) changes.
+* 4 death block: Move each direction and reverse the direction random-cyclically. Touching them will kill the snake.
+* Walls around the edges of the display where the direction of the snake reverses if going out.
+* Two purple poisons which make score 0 and cause loss of the body.
+* Pause function: Press "SPACE" key.
+* Best score: On top of the display.
 
 ## Rubric Points
-*
+
+1. The project demonstrates an understanding of C++ functions and control structures.
+* game.cpp, line 190 - Add a direction reveral funciton.
+
+2. The project accepts user input and processes the input.
+* controller.cpp, line 41 - Add a pause function with using "Space" key. 
+
+3. The project uses Object Oriented Programming techniques.
+* wall.h / wall.cpp - Create "Wall" class in new separate files.
+
+4. Class constructors utilize member initialization lists.
+* In "Wall" class, use member initialization lists with direction and speed as arguments.
+
+5 The project uses multithreading.
+* wall.cpp, line 11, 19 - The death blocks reversal.
+* game.cpp, line 81, 163 - Bounus food time.
 
 
 ## Dependencies for Running Locally
