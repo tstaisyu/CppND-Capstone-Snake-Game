@@ -38,7 +38,13 @@ Renderer::~Renderer() {
   SDL_Quit();
 }
 
-void Renderer::Render(Snake const snake, SDL_Point const &food, SDL_Point const &poison1, SDL_Point const &poison2, SDL_Point const &wall1, SDL_Point const &wall2, SDL_Point const &wall3, SDL_Point const &wall4) {
+//Source: https://wiki.libsdl.org/SDL2/SDL_SetWindowTitle
+void Renderer::PauseMenu() {
+  std::string menu{"Pause"};
+  SDL_SetWindowTitle(sdl_window, menu.c_str());
+}
+
+void Renderer::Render(Snake const snake, SDL_Point const &food, SDL_Point const &poison1, SDL_Point const &poison2, Wall const &block1, Wall const &block2, Wall const &block3, Wall const &block4, bool *bounus) {
   SDL_Rect block;
   block.w = screen_width / grid_width;
   block.h = screen_height / grid_height;
@@ -48,44 +54,47 @@ void Renderer::Render(Snake const snake, SDL_Point const &food, SDL_Point const 
   SDL_RenderClear(sdl_renderer);
 
   // Render food
-  SDL_SetRenderDrawColor(sdl_renderer, 0xFF, 0xCC, 0x00, 0xFF);
+  if (*bounus) {
+    SDL_SetRenderDrawColor(sdl_renderer, 0xFF, 0xD7, 0x00, 0xFF);
+  } else {
+    SDL_SetRenderDrawColor(sdl_renderer, 0x66, 0xCD, 0xAA, 0xFF);
+  }
   block.x = food.x * block.w;
   block.y = food.y * block.h;
   SDL_RenderFillRect(sdl_renderer, &block);
 
   // Render poison1
-  SDL_SetRenderDrawColor(sdl_renderer, 0xFF, 0x00, 0x00, 0xFF);
+  SDL_SetRenderDrawColor(sdl_renderer, 0x69, 0x4D, 0x9F, 0xFF);
   block.x = poison1.x * block.w;
   block.y = poison1.y * block.h;
   SDL_RenderFillRect(sdl_renderer, &block);
 
   // Render poison2
-  SDL_SetRenderDrawColor(sdl_renderer, 0xFF, 0x00, 0x00, 0xFF);
+  SDL_SetRenderDrawColor(sdl_renderer, 0x69, 0x4D, 0x9F, 0xFF);
   block.x = poison2.x * block.w;
   block.y = poison2.y * block.h;
   SDL_RenderFillRect(sdl_renderer, &block);
 
   // Render wall
   SDL_SetRenderDrawColor(sdl_renderer, 0x55, 0x55, 0x55, 0xFF);
-  block.x = wall1.x * block.w;
-  block.y = wall1.y * block.h;
-  SDL_RenderFillRect(sdl_renderer, &block);
+    block.x = block1.x * block.w;
+    block.y = block1.y * block.h;
+    SDL_RenderFillRect(sdl_renderer, &block);
 
   SDL_SetRenderDrawColor(sdl_renderer, 0x55, 0x55, 0x55, 0xFF);
-  block.x = wall2.x * block.w;
-  block.y = wall2.y * block.h;
-  SDL_RenderFillRect(sdl_renderer, &block);
+    block.x = block2.x * block.w;
+    block.y = block2.y * block.h;
+    SDL_RenderFillRect(sdl_renderer, &block);  
 
   SDL_SetRenderDrawColor(sdl_renderer, 0x55, 0x55, 0x55, 0xFF);
-  block.x = wall3.x * block.w;
-  block.y = wall3.y * block.h;
-  SDL_RenderFillRect(sdl_renderer, &block);
+    block.x = block3.x * block.w;
+    block.y = block3.y * block.h;
+    SDL_RenderFillRect(sdl_renderer, &block);
 
   SDL_SetRenderDrawColor(sdl_renderer, 0x55, 0x55, 0x55, 0xFF);
-  block.x = wall4.x * block.w;
-  block.y = wall4.y * block.h;
-  SDL_RenderFillRect(sdl_renderer, &block);
-
+    block.x = block4.x * block.w;
+    block.y = block4.y * block.h;
+    SDL_RenderFillRect(sdl_renderer, &block);  
   // Render snake's body
   SDL_SetRenderDrawColor(sdl_renderer, 0xFF, 0xFF, 0xFF, 0xFF);
   for (SDL_Point const &point : snake.body) {

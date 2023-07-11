@@ -208,15 +208,21 @@ CMakeFiles/SnakeGame.dir/src/renderer.cpp.o: \
  /usr/include/SDL2/SDL_shape.h /usr/include/SDL2/SDL_system.h \
  /usr/include/SDL2/SDL_timer.h /usr/include/SDL2/SDL_version.h \
  /home/taisyu/Udacity/C++/CppND-Capstone-Snake-Game/src/snake.h \
- /usr/include/c++/9/iostream /usr/include/c++/9/ostream \
- /usr/include/c++/9/ios /usr/include/c++/9/iosfwd \
- /usr/include/c++/9/bits/stringfwd.h /usr/include/c++/9/bits/postypes.h \
- /usr/include/c++/9/cwchar /usr/include/c++/9/bits/char_traits.h \
- /usr/include/c++/9/cstdint /usr/include/c++/9/bits/localefwd.h \
+ /home/taisyu/Udacity/C++/CppND-Capstone-Snake-Game/src/wall.h \
+ /usr/include/c++/9/random /usr/include/c++/9/string \
+ /usr/include/c++/9/bits/stringfwd.h \
+ /usr/include/c++/9/bits/char_traits.h /usr/include/c++/9/bits/postypes.h \
+ /usr/include/c++/9/cwchar /usr/include/c++/9/cstdint \
+ /usr/include/c++/9/bits/localefwd.h \
  /usr/include/x86_64-linux-gnu/c++/9/bits/c++locale.h \
  /usr/include/c++/9/clocale /usr/include/locale.h \
- /usr/include/x86_64-linux-gnu/bits/locale.h /usr/include/c++/9/cctype \
- /usr/include/c++/9/bits/ios_base.h /usr/include/c++/9/ext/atomicity.h \
+ /usr/include/x86_64-linux-gnu/bits/locale.h /usr/include/c++/9/iosfwd \
+ /usr/include/c++/9/cctype /usr/include/c++/9/bits/ostream_insert.h \
+ /usr/include/c++/9/bits/cxxabi_forced.h \
+ /usr/include/c++/9/bits/stl_function.h \
+ /usr/include/c++/9/backward/binders.h \
+ /usr/include/c++/9/bits/basic_string.h \
+ /usr/include/c++/9/ext/atomicity.h \
  /usr/include/x86_64-linux-gnu/c++/9/bits/gthr.h \
  /usr/include/x86_64-linux-gnu/c++/9/bits/gthr-default.h \
  /usr/include/pthread.h /usr/include/sched.h \
@@ -229,13 +235,7 @@ CMakeFiles/SnakeGame.dir/src/renderer.cpp.o: \
  /usr/include/x86_64-linux-gnu/bits/types/struct_itimerspec.h \
  /usr/include/x86_64-linux-gnu/bits/setjmp.h \
  /usr/include/x86_64-linux-gnu/c++/9/bits/atomic_word.h \
- /usr/include/c++/9/bits/locale_classes.h /usr/include/c++/9/string \
- /usr/include/c++/9/bits/ostream_insert.h \
- /usr/include/c++/9/bits/cxxabi_forced.h \
- /usr/include/c++/9/bits/stl_function.h \
- /usr/include/c++/9/backward/binders.h \
- /usr/include/c++/9/bits/basic_string.h /usr/include/c++/9/string_view \
- /usr/include/c++/9/bits/string_view.tcc \
+ /usr/include/c++/9/string_view /usr/include/c++/9/bits/string_view.tcc \
  /usr/include/c++/9/ext/string_conversions.h /usr/include/c++/9/cstdio \
  /usr/include/c++/9/cerrno /usr/include/errno.h \
  /usr/include/x86_64-linux-gnu/bits/errno.h /usr/include/linux/errno.h \
@@ -243,6 +243,16 @@ CMakeFiles/SnakeGame.dir/src/renderer.cpp.o: \
  /usr/include/asm-generic/errno.h /usr/include/asm-generic/errno-base.h \
  /usr/include/x86_64-linux-gnu/bits/types/error_t.h \
  /usr/include/c++/9/bits/basic_string.tcc \
+ /usr/include/c++/9/bits/random.h \
+ /usr/include/c++/9/bits/uniform_int_dist.h \
+ /usr/include/x86_64-linux-gnu/c++/9/bits/opt_random.h \
+ /usr/include/c++/9/bits/random.tcc /usr/include/c++/9/numeric \
+ /usr/include/c++/9/bits/stl_numeric.h \
+ /usr/include/c++/9/pstl/glue_numeric_defs.h \
+ /usr/include/c++/9/pstl/execution_defs.h /usr/include/c++/9/iostream \
+ /usr/include/c++/9/ostream /usr/include/c++/9/ios \
+ /usr/include/c++/9/bits/ios_base.h \
+ /usr/include/c++/9/bits/locale_classes.h \
  /usr/include/c++/9/bits/locale_classes.tcc \
  /usr/include/c++/9/system_error \
  /usr/include/x86_64-linux-gnu/c++/9/bits/error_constants.h \

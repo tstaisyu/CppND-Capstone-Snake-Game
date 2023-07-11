@@ -9,7 +9,7 @@ void Snake::Update() {
       static_cast<int>(head_x),
       static_cast<int>(
           head_y)};  // We first capture the head's cell before updating.
-  UpdateHead();
+  Snake::UpdateHead();
   SDL_Point current_cell{
       static_cast<int>(head_x),
       static_cast<int>(head_y)};  // Capture the head's cell after updating.
@@ -18,6 +18,26 @@ void Snake::Update() {
   // cell.
   if (current_cell.x != prev_cell.x || current_cell.y != prev_cell.y) {
     UpdateBody(current_cell, prev_cell);
+  }
+}
+
+void Snake::Redirect() {
+  switch (direction) {
+    case Direction::kUp:
+      direction = Direction::kDown;
+      break;
+
+    case Direction::kDown:
+      direction = Direction::kUp;
+      break;
+
+    case Direction::kLeft:
+      direction = Direction::kRight;
+      break;
+
+    case Direction::kRight:
+      direction = Direction::kLeft;
+      break;
   }
 }
 
@@ -74,30 +94,6 @@ void Snake::UpdateBody(SDL_Point &current_head_cell, SDL_Point &prev_head_cell) 
 
 void Snake::GrowBody() { growing = true; }
 void Snake::LostBody() { lostBody = true; }
-
-void Snake::WallRedirect() {
-  if (Game::_Wall == true) {
-    switch (direction) {
-      case Direction::kUp:
-        head_y += speed;
-        break;
-
-      case Direction::kDown:
-        head_y -= speed;
-        break;
-
-      case Direction::kLeft:
-        head_x += speed;
-        break;
-
-      case Direction::kRight:
-        head_x -= speed;
-        break;
-    }
-  }
-}
-
-
 
 // Inefficient method to check if cell is occupied by snake.
 bool Snake::SnakeCell(int x, int y) {

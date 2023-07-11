@@ -15,10 +15,10 @@ class Snake {
         head_y(grid_height / 2) {}
 
   void Update();
+  void Redirect();
 
   void GrowBody();
   void LostBody();
-  void WallRedirect();
   bool SnakeCell(int x, int y);
 
   Direction direction = Direction::kUp;
@@ -33,7 +33,6 @@ class Snake {
  private:
   void UpdateHead();
   void UpdateBody(SDL_Point &current_cell, SDL_Point &prev_cell);
-
   bool growing{false};
   bool lostBody{false};
   int grid_width;

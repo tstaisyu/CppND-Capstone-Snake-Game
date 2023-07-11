@@ -6,5 +6,5 @@ CXX_DEFINES =
 
 CXX_INCLUDES = -I/usr/include/SDL2 -I/home/taisyu/Udacity/C++/CppND-Capstone-Snake-Game/src
 
-CXX_FLAGS = -std=gnu++17   -std=c++17
+CXX_FLAGS =  -pthread -std=gnu++17   -std=c++17
 

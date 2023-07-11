@@ -6,9 +6,16 @@ This is a starter repo for the Capstone project in the [Udacity C++ Nanodegree P
 
 <img src="snake_game.gif"/>
 
-The Capstone Project gives you a chance to integrate what you've learned throughout this program. This project will become an important part of your portfolio to share with current and future colleagues and employers.
+In this project, I added several functions to the Snake Game starter code based on what I learned in the Udacity C++ Nanodegree Program.
 
-In this project, you can build your own C++ application or extend this Snake game, following the principles you have learned throughout this Nanodegree Program. This project will demonstrate that you can independently create applications using a wide range of C++ features.
+## Additional Features
+* There is a greatwall around the display.
+* Pause 
+
+
+## Rubric Points
+*
+
 
 ## Dependencies for Running Locally
 * cmake >= 3.7

@@ -2,29 +2,54 @@
 #define WALL_H
 
 #include <vector>
+#include <random>
 #include "SDL.h"
 
 class Wall {
  public:
+  enum class Direction { kUp, kDown, kLeft, kRight };
 
-  Wall(int length, bool vertical) {};
+  Wall(int grid_width, int grid_height, Direction direction, float speed)
+    : grid_width(grid_width),
+      grid_height(grid_height),
+      engine(dev()),
+      random_w(0, static_cast<int>(grid_width - 1)),
+      random_h(0, static_cast<int>(grid_height - 1)),
+      x(static_cast<int>(random_w(engine))),
+      y(static_cast<int>(random_h(engine))),
+      direction(direction),
+      speed(speed) {}
+
+/*
+  Wall(int grid_width, int grid_height, int length, bool vertical)
+    : grid_width(grid_width),
+      grid_height(grid_height),
+      engine(dev()),
+      random_w(0, static_cast<int>(grid_width - 1)),
+      random_h(0, static_cast<int>(grid_height - 1)),
+      length(length),
+      vertical(true) {}
+*/
 
   void Update();
-
-  void WallRedirect();
-  bool SnakeCell(int x, int y);
-
-  int size{4};
-  float head_x;
-  float head_y;
+  
+  Direction direction;
+  float speed;
+  float x;
+  float y;
 
  private:
-  void UpdateHead();
-  void UpdateBody(SDL_Point &current_cell, SDL_Point &prev_cell);
 
-  bool vertical;
   int grid_width;
   int grid_height;
+
+  std::random_device dev;
+  std::mt19937 engine;
+  std::uniform_int_distribution<int> random_w;
+  std::uniform_int_distribution<int> random_h;
+
+  void MoveBlock();
+
 };
 
 #endif

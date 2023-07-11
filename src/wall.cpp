@@ -1,87 +1,44 @@
 
 #include <cmath>
 #include <iostream>
-#include "snake.h"
+#include "wall.h"
 #include "game.h"
 
-Wall::wall() {
-  int x, y;
-  while (true) {
-    x = random_w(engine);
-    y = random_h(engine);
-    // Check that the location is not occupied by a snake item before placing
-    // food.
-    if (!snake.SnakeCell(x, y)) {
-      food.x = x;
-      food.y = y;
-      return;
-    }
-  }
+void Wall::Update() {
+  SDL_Point prev_cell{
+      static_cast<int>(x),
+      static_cast<int>(y)};  // The head's cell before updating.
+  Wall::MoveBlock();
+  SDL_Point current_cell{
+      static_cast<int>(x),
+      static_cast<int>(y)};  // The block's cell after updating.
 }
 
-
-
-void Snake::Update() {
-}
-
-void Snake::UpdateHead() {
+void Wall::MoveBlock() {
   switch (direction) {
     case Direction::kUp:
-      head_y -= speed;
+      y -= speed;
       break;
 
     case Direction::kDown:
-      head_y += speed;
+      y += speed;
       break;
 
     case Direction::kLeft:
-      head_x -= speed;
+      x -= speed;
       break;
 
     case Direction::kRight:
-      head_x += speed;
+      x += speed;
       break;
   }
 
-  // Wrap the Snake around to the beginning if going off of the screen.
-  head_x = fmod(head_x + grid_width, grid_width);
-  head_y = fmod(head_y + grid_height, grid_height);
+  x = fmod(x + grid_width, grid_width);
+  y = fmod(y + grid_height, grid_height);
 }
-
-void Snake::UpdateBody(SDL_Point &current_head_cell, SDL_Point &prev_head_cell) {
+/*
+Wall::Wall(int grid_width, int grid_height, int length, bool vertical) {
+  x(static_cast<int>(random_w(engine))),
+  y(static_cast<int>(random_h(engine)))
 }
-
-void Snake::WallRedirect() {
-  if (Game::_Wall == true) {
-    switch (direction) {
-      case Direction::kUp:
-        head_y += speed;
-        break;
-
-      case Direction::kDown:
-        head_y -= speed;
-        break;
-
-      case Direction::kLeft:
-        head_x += speed;
-        break;
-
-      case Direction::kRight:
-        head_x -= speed;
-        break;
-    }
-  }
-}
-
-// Inefficient method to check if cell is occupied by snake.
-bool Snake::SnakeCell(int x, int y) {
-  if (x == static_cast<int>(head_x) && y == static_cast<int>(head_y)) {
-    return true;
-  }
-  for (auto const &item : body) {
-    if (x == item.x && y == item.y) {
-      return true;
-    }
-  }
-  return false;
-}
+*/
